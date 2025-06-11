@@ -39,10 +39,10 @@ export class TransactionService {
 				createdAt: 'DESC',
 			},
 			relations: {
-				user: true,
+				category: true,
 			},
 		})
-		if (!transaction) throw new NotFoundException('transaction not found')
+		// if (!transaction) throw new NotFoundException('transaction not found')
 
 		return transaction
 	}
@@ -98,7 +98,13 @@ export class TransactionService {
 					createdAt: 'DESC',
 				},
 			})
-		return transactions
+			return {
+  items: transactions,
+  total,
+}
+		// return transactions
+
+		
 		// return {
 		//   data: transactions,
 		//   total,

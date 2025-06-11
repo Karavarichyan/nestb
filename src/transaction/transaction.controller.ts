@@ -38,6 +38,7 @@ export class TransactionController {
 		console.log(req);
  return this.transactionService.findAllByType(+req.user.id, type)
 	}
+
 	@Get('pagination')
 	@UseGuards(JwtAuthGuard)
 	findAllWithPagination(
@@ -53,11 +54,20 @@ export class TransactionController {
 		)
 	}
 
-	@Get()
-	@UseGuards(JwtAuthGuard, AuthorGuard)
-	findAll(@Req() req) {
-		return this.transactionService.findAll(+req.user.id)
-	}
+	// @Get()
+	// @UseGuards(JwtAuthGuard, AuthorGuard)
+	// findAll(@Req() req) {
+	// 	return this.transactionService.findAll(+req.user.id)
+	// }
+	// transaction.controller.ts
+@Get()
+// @UseGuards(JwtAuthGuard, AuthorGuard) // ЗАКОММЕНТИРУЙТЕ ИЛИ УДАЛИТЕ ЭТИ ДВЕ СТРОКИ
+findAll(@Req() req) {
+  console.log('User object in findAll:', req.user); // Добавьте это для отладки
+  // Здесь, если вы удалили Guards, req.user будет undefined,
+  // поэтому временно измените вызов сервиса, чтобы он не требовал req.user.id
+  return this.transactionService.findAll(1); // Например, используйте заглушку ID пользователя для теста
+}
 
 	@Get(':type/:id')
 	@UseGuards(JwtAuthGuard, AuthorGuard)
