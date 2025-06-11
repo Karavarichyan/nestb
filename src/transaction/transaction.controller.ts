@@ -38,7 +38,7 @@ export class TransactionController {
 		console.log(req);
  return this.transactionService.findAllByType(+req.user.id, type)
 	}
-
+// test
 	@Get('pagination')
 	@UseGuards(JwtAuthGuard)
 	findAllWithPagination(
